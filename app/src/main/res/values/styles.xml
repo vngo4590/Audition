@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BodyText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="CustomHeadline6" parent="TitleText">
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="TitleText" parent="BodyText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>
