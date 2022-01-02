@@ -19,7 +19,7 @@ data class Track(
     @Json(name = "share")
     val share: Share,
     @Json(name = "images")
-    val images: Images,
+    val images: Images?=null,
     @Json(name = "hub")
     val hub: Hub,
     @Json(name = "artists")

@@ -13,7 +13,7 @@ data class Share(
     @Json(name = "href")
     val href: String,
     @Json(name = "image")
-    val image: String,
+    val image: String?=null,
     @Json(name = "twitter")
     val twitter: String?=null,
     @Json(name = "html")

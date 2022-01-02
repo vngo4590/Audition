@@ -10,22 +10,22 @@ import com.creatis.audition.data.playtrack.playtracklist.Track
 * */
 data class TrackAndShare (
     @Embedded
-    val track: TrackModel,
+    var track: TrackModel,
     @Relation(
         parentColumn = "share_id",
         entityColumn = "share_id"
     )
-    val share: ShareModel
+    var share: ShareModel
 )
 
 data class TrackAndImage (
     @Embedded
-    val track: TrackModel,
+    var track: TrackModel,
     @Relation(
         parentColumn = "image_id",
         entityColumn = "image_id"
     )
-    val image: ImageModel
+    var image: ImageModel
 )
 
 

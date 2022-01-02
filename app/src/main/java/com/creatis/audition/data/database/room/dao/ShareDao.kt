@@ -1,12 +1,9 @@
 package com.creatis.audition.data.database.room.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.creatis.audition.data.database.room.models.ShareModel
-
+@Dao
 interface ShareDao {
     @Insert(
         onConflict = OnConflictStrategy.REPLACE

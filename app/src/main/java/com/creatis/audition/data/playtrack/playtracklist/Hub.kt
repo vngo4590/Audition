@@ -11,7 +11,7 @@ data class Hub(
     @Json(name = "image")
     val image: String,
     @Json(name = "actions")
-    val actions: List<Action>,
+    val actions: List<Action>?=null,
     @Json(name = "options")
     val options: List<Option>,
     @Json(name = "providers")

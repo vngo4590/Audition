@@ -19,6 +19,7 @@ buildscript {
         version_glide = "4.12.0"
         version_navigation = "2.4.0-rc01"
         version_room = "2.4.0"
+        version_reflect = "1.6.10"
     }
     repositories {
         google()

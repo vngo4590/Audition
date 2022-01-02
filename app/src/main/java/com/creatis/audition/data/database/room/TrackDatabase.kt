@@ -13,7 +13,8 @@ import com.creatis.audition.data.database.room.models.TrackModel
 
 @Database(
     version = 1,
-    entities = [ImageModel::class, ShareModel::class, TrackModel::class],
+    entities = [TrackModel::class, ImageModel::class, ShareModel::class],
+    exportSchema = true,
 //    autoMigrations = [
 //        AutoMigration (
 //            from = 1,

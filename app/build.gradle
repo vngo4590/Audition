@@ -81,4 +81,7 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
+
+    // Reflect
+    implementation("org.jetbrains.kotlin:kotlin-reflect:$version_reflect")
 }

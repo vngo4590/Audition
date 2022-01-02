@@ -26,7 +26,6 @@ class PlayTrackChartFragment : Fragment() {
         playTrackChartViewModel = ViewModelProvider(this)[PlayTrackChartViewModel::class.java]
         _binding = FragmentPlayTrackChartBinding.inflate(inflater, container, false)
         binding.chartViewModel = playTrackChartViewModel
-        binding.lifecycleOwner = this
 
         /*
         * Set up the recycler view

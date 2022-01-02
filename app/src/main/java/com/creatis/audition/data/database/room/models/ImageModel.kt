@@ -1,9 +1,6 @@
 package com.creatis.audition.data.database.room.models
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.squareup.moshi.Json
 
 @Entity(
@@ -14,24 +11,29 @@ import com.squareup.moshi.Json
         childColumns = arrayOf("track_id"),
         onDelete = ForeignKey.CASCADE,
         onUpdate = ForeignKey.CASCADE,
-    )]
+    )],
+    indices = [
+        Index(value = arrayOf("track_id"), unique = true),
+        Index(value = arrayOf("image_id"), unique = true),
+        Index(value = arrayOf("track_id", "image_id"), unique = true),
+    ]
 )
 data class ImageModel(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "image_id")
-    val imageId : Long = 0L,
+    var imageId : Long = 0L,
     @ColumnInfo(name = "track_id", defaultValue = "NULL")
     var trackId: String? = null,
     @ColumnInfo(name = "background", defaultValue = "NULL")
-    val background: String?,
+    var background: String?= null,
     @ColumnInfo(name = "cover_art", defaultValue = "NULL")
-    val coverArt: String?,
+    var coverArt: String?= null,
     @ColumnInfo(name = "cover_art_hq", defaultValue = "NULL")
-    val coverArtHq: String?,
+    var coverArtHq: String?= null,
     @ColumnInfo(name = "joe_color", defaultValue = "NULL")
-    val joeColor: String?,
+    var joeColor: String?= null,
     @ColumnInfo(name = "overflow", defaultValue = "NULL")
-    val overflow: String?,
+    var overflow: String?= null,
     @ColumnInfo(name = "default", defaultValue = "NULL")
-    val default: String?
+    var default: String?= null
 )

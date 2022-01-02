@@ -18,7 +18,7 @@ data class TrackModel(
     val title: String,
     @ColumnInfo(name = "subtitle")
     val subtitle: String,
-    @ColumnInfo(name = "shareId")
+    @ColumnInfo(name = "share_id")
     var shareId: Long=0L,
     @ColumnInfo(name = "image_id")
     var imageId: Long=0L,

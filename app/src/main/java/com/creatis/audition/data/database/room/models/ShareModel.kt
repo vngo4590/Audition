@@ -15,13 +15,14 @@ import androidx.room.*
     ],
     indices = [
         Index(value = arrayOf("track_id"), unique = true),
-        Index(value = arrayOf("share_id")),
+        Index(value = arrayOf("share_id"), unique = true),
+        Index(value = arrayOf("track_id", "share_id"), unique = true),
     ]
 )
 data class ShareModel(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "share_id")
-    val shareId: Long = 0L,
+    var shareId: Long = 0L,
     @ColumnInfo(name = "track_id", defaultValue = "NULL")
     var trackId: String? = null,
     @ColumnInfo(name = "subject")
@@ -30,8 +31,8 @@ data class ShareModel(
     val text: String,
     @ColumnInfo(name = "href")
     val href: String,
-    @ColumnInfo(name = "image")
-    val image: String,
+    @ColumnInfo(name = "image", defaultValue = "NULL")
+    var image: String?=null,
     @ColumnInfo(name = "twitter")
     val twitter: String? = null,
     @ColumnInfo(name = "html")
