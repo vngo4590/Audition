@@ -2,35 +2,35 @@ package com.creatis.audition.data.database.room.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.creatis.audition.data.database.room.models.ImageModel
+import com.creatis.audition.data.database.room.models.ImagesModel
 @Dao
 interface ImageDao {
     @Insert(
         onConflict = OnConflictStrategy.REPLACE
     )
-    fun insertImage(image: ImageModel) : Long
+    fun insertImage(images: ImagesModel) : Long
 
     @Query(
-        "SELECT * FROM Image WHERE track_id = :trackId"
+        "SELECT * FROM Images WHERE track_id = :trackId"
     )
-    fun getImageByTrackId(trackId: String): LiveData<ImageModel>
+    fun getImageByTrackId(trackId: String): LiveData<ImagesModel>
 
     @Query(
-        "SELECT * FROM Image WHERE image_id = :imageId"
+        "SELECT * FROM Images WHERE image_id = :imageId"
     )
-    fun getImageByImageId(imageId: Long): LiveData<ImageModel>
+    fun getImageByImageId(imageId: Long): LiveData<ImagesModel>
 
     @Query(
-        "SELECT * FROM Image WHERE rowId = :rowId"
+        "SELECT * FROM Images WHERE rowId = :rowId"
     )
-    fun getImageByRowId(rowId: Long): LiveData<ImageModel>
+    fun getImageByRowId(rowId: Long): LiveData<ImagesModel>
 
 
     @Query(
-        "SELECT * FROM Image"
+        "SELECT * FROM Images"
     )
-    fun getImages(): LiveData<List<ImageModel>>
+    fun getImages(): LiveData<List<ImagesModel>>
 
     @Update
-    fun updateImage(image: ImageModel)
+    fun updateImage(images: ImagesModel)
 }

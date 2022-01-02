@@ -3,7 +3,6 @@ package com.creatis.audition.data.database.room.models
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.creatis.audition.data.playtrack.playtracklist.Track
 
 @Entity(tableName = "Track")
 data class TrackModel(

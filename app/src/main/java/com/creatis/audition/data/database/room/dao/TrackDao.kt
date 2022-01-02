@@ -2,9 +2,9 @@ package com.creatis.audition.data.database.room.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.creatis.audition.data.database.room.TrackAndImage
+import com.creatis.audition.data.database.room.TrackAndImages
 import com.creatis.audition.data.database.room.TrackAndShare
-import com.creatis.audition.data.database.room.models.ImageModel
+import com.creatis.audition.data.database.room.models.ImagesModel
 import com.creatis.audition.data.database.room.models.ShareModel
 import com.creatis.audition.data.database.room.models.TrackModel
 
@@ -12,7 +12,7 @@ import com.creatis.audition.data.database.room.models.TrackModel
 interface TrackDao {
     @Transaction
     @Query("SELECT * FROM Track")
-    fun getTrackAndImage(): LiveData<List<TrackAndImage>>
+    fun getTrackAndImage(): LiveData<List<TrackAndImages>>
 
     @Transaction
     @Query("SELECT * FROM Track")
@@ -44,8 +44,8 @@ interface TrackDao {
         }
     }
     @Transaction
-    fun insertTrackAndImage(imageDao: ImageDao, track: TrackModel, imageModel: ImageModel) {
-        val imgRowId : Long = imageDao.insertImage(imageModel)
+    fun insertTrackAndImage(imageDao: ImageDao, track: TrackModel, imagesModel: ImagesModel) {
+        val imgRowId : Long = imageDao.insertImage(imagesModel)
         val imageValue = imageDao.getImageByRowId(imgRowId).value
         if (imageValue != null){
             imageValue.trackId = track.trackId

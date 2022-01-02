@@ -1,10 +1,9 @@
 package com.creatis.audition.data.database.room.models
 
 import androidx.room.*
-import com.squareup.moshi.Json
 
 @Entity(
-    tableName = "Image",
+    tableName = "Images",
     foreignKeys = [ForeignKey(
         entity = TrackModel::class,
         parentColumns = arrayOf("track_id"),
@@ -18,7 +17,7 @@ import com.squareup.moshi.Json
         Index(value = arrayOf("track_id", "image_id"), unique = true),
     ]
 )
-data class ImageModel(
+data class ImagesModel(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "image_id")
     var imageId : Long = 0L,

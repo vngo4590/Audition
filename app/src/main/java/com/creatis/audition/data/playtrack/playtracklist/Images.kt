@@ -9,11 +9,11 @@ data class Images(
     @Json(name = "background")
     val background: String?=null,
     @Json(name = "coverart")
-    val coverart: String?=null,
+    val coverArt: String?=null,
     @Json(name = "coverarthq")
-    val coverarthq: String?=null,
+    val coverArtHq: String?=null,
     @Json(name = "joecolor")
-    val joecolor: String?=null,
+    val joeColor: String?=null,
     @Json(name = "overflow")
     val overflow: String?=null,
     @Json(name = "default")

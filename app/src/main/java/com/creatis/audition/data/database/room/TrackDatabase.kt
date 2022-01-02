@@ -7,13 +7,13 @@ import androidx.room.RoomDatabase
 import com.creatis.audition.data.database.room.dao.ImageDao
 import com.creatis.audition.data.database.room.dao.ShareDao
 import com.creatis.audition.data.database.room.dao.TrackDao
-import com.creatis.audition.data.database.room.models.ImageModel
+import com.creatis.audition.data.database.room.models.ImagesModel
 import com.creatis.audition.data.database.room.models.ShareModel
 import com.creatis.audition.data.database.room.models.TrackModel
 
 @Database(
     version = 1,
-    entities = [TrackModel::class, ImageModel::class, ShareModel::class],
+    entities = [TrackModel::class, ImagesModel::class, ShareModel::class],
     exportSchema = true,
 //    autoMigrations = [
 //        AutoMigration (

@@ -3,7 +3,6 @@ package com.creatis.audition.data.database.room
 import androidx.room.Embedded
 import androidx.room.Relation
 import com.creatis.audition.data.database.room.models.*
-import com.creatis.audition.data.playtrack.playtracklist.Track
 
 /*
 * Relations for the main class
@@ -18,14 +17,14 @@ data class TrackAndShare (
     var share: ShareModel
 )
 
-data class TrackAndImage (
+data class TrackAndImages (
     @Embedded
     var track: TrackModel,
     @Relation(
         parentColumn = "image_id",
         entityColumn = "image_id"
     )
-    var image: ImageModel
+    var images: ImagesModel
 )
 
 
