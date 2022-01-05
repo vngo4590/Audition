@@ -1,6 +1,7 @@
 package com.creatis.audition.data.database
 
 import androidx.lifecycle.MutableLiveData
+import com.creatis.audition.data.database.room.TrackDatabase
 import com.creatis.audition.data.playtrack.chartlist.ChartList
 import com.creatis.audition.data.playtrack.playtracklist.PlayTracks
 import com.creatis.audition.data.playtrack.playtracklist.Track
@@ -9,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PlayTrackRepository(
+    private val trackDatabase: TrackDatabase,
     private val shazamSongsApiService: ShazamSongsApiService,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {

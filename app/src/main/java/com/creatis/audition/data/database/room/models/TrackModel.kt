@@ -1,5 +1,6 @@
 package com.creatis.audition.data.database.room.models
 
+import androidx.annotation.Nullable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -19,8 +20,9 @@ data class TrackModel(
     val subtitle: String,
     @ColumnInfo(name = "share_id")
     var shareId: Long=0L,
-    @ColumnInfo(name = "image_id")
-    var imageId: Long=0L,
+    @ColumnInfo(name = "image_id", defaultValue = "NULL")
+    @Nullable
+    var imageId: Long?=0L,
     @ColumnInfo(name = "url")
     val url: String,
     ) {

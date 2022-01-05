@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3475211759243f0158ec0a7edce6228f",
+    "identityHash": "f83a77ebd0f055f3bd8e9704c7710c24",
     "entities": [
       {
         "tableName": "Track",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`track_id` TEXT NOT NULL, `layout` TEXT NOT NULL, `type` TEXT NOT NULL, `title` TEXT NOT NULL, `subtitle` TEXT NOT NULL, `share_id` INTEGER NOT NULL, `image_id` INTEGER NOT NULL, `url` TEXT NOT NULL, PRIMARY KEY(`track_id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`track_id` TEXT NOT NULL, `layout` TEXT NOT NULL, `type` TEXT NOT NULL, `title` TEXT NOT NULL, `subtitle` TEXT NOT NULL, `share_id` INTEGER NOT NULL, `image_id` INTEGER DEFAULT NULL, `url` TEXT NOT NULL, PRIMARY KEY(`track_id`))",
         "fields": [
           {
             "fieldPath": "trackId",
@@ -48,7 +48,8 @@
             "fieldPath": "imageId",
             "columnName": "image_id",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false,
+            "defaultValue": "NULL"
           },
           {
             "fieldPath": "url",
@@ -68,7 +69,7 @@
       },
       {
         "tableName": "Images",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`image_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `track_id` TEXT DEFAULT NULL, `background` TEXT DEFAULT NULL, `cover_art` TEXT DEFAULT NULL, `cover_art_hq` TEXT DEFAULT NULL, `joe_color` TEXT DEFAULT NULL, `overflow` TEXT DEFAULT NULL, FOREIGN KEY(`track_id`) REFERENCES `Track`(`track_id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`image_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `track_id` TEXT DEFAULT NULL, `background` TEXT DEFAULT NULL, `cover_art` TEXT DEFAULT NULL, `cover_art_hq` TEXT DEFAULT NULL, `joe_color` TEXT DEFAULT NULL, `overflow` TEXT DEFAULT NULL, `default` TEXT DEFAULT NULL, FOREIGN KEY(`track_id`) REFERENCES `Track`(`track_id`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "imageId",
@@ -114,6 +115,13 @@
           {
             "fieldPath": "overflow",
             "columnName": "overflow",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "NULL"
+          },
+          {
+            "fieldPath": "default",
+            "columnName": "default",
             "affinity": "TEXT",
             "notNull": false,
             "defaultValue": "NULL"
@@ -290,7 +298,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3475211759243f0158ec0a7edce6228f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f83a77ebd0f055f3bd8e9704c7710c24')"
     ]
   }
 }

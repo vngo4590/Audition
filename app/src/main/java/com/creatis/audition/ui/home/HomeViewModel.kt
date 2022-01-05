@@ -12,10 +12,6 @@ import kotlinx.coroutines.*
 import timber.log.Timber
 
 class HomeViewModel : ViewModel() {
-
-    private val shazamApiService = ServiceUtil.serviceApiCreate()
-    private val playTrackRepository: PlayTrackRepository = PlayTrackRepository(shazamApiService)
-
     private val _text = MutableLiveData<String>().apply {
         value = "Hello Home"
     }
@@ -23,7 +19,7 @@ class HomeViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            _text.value = playTrackRepository.fetchChartTracks().toString()
+            _text.value = "Running"
         }
     }
 

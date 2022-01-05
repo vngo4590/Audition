@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.creatis.audition.data.database.room.dao.ImageDao
 import com.creatis.audition.data.database.room.dao.ShareDao
 import com.creatis.audition.data.database.room.dao.TrackDao
@@ -15,14 +16,15 @@ import com.creatis.audition.data.database.room.models.TrackModel
     version = 1,
     entities = [TrackModel::class, ImagesModel::class, ShareModel::class],
     exportSchema = true,
-//    autoMigrations = [
-//        AutoMigration (
-//            from = 1,
-//            to = 2,
-//            spec = AppDatabase.MyAutoMigration::class
-//        )
-//    ]
+    /*autoMigrations = [
+        AutoMigration (
+            from = 1,
+            to = 2,
+            spec = AppDatabase.MyAutoMigration::class
+        )
+    ]*/
 )
+@TypeConverters(Converters::class)
 abstract class TrackDatabase : RoomDatabase() {
     abstract val imageDao: ImageDao
     abstract val shareDao: ShareDao
