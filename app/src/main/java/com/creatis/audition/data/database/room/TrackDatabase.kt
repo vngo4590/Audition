@@ -5,10 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.creatis.audition.data.database.room.dao.ImageDao
-import com.creatis.audition.data.database.room.dao.RelationDao
-import com.creatis.audition.data.database.room.dao.ShareDao
-import com.creatis.audition.data.database.room.dao.TrackDao
+import com.creatis.audition.data.database.room.dao.TrackRelationDao
 import com.creatis.audition.data.database.room.models.ImagesModel
 import com.creatis.audition.data.database.room.models.ShareModel
 import com.creatis.audition.data.database.room.models.TrackModel
@@ -30,7 +27,7 @@ abstract class TrackDatabase : RoomDatabase() {
     /*abstract val imageDao: ImageDao
     abstract val shareDao: ShareDao
     abstract val trackDao: TrackDao*/
-    abstract val relationDao : RelationDao
+    abstract val trackRelationDao : TrackRelationDao
 
     companion object {
         @Volatile

@@ -7,7 +7,7 @@ import com.creatis.audition.data.database.room.models.ImagesModel
 import com.creatis.audition.data.database.room.models.ShareModel
 
 @Dao
-interface RelationDao : TrackDao, ImageDao, ShareDao {
+interface TrackRelationDao : TrackDao, ImageDao, ShareDao {
     /*
     * Insert relational Data
     * */

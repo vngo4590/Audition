@@ -21,7 +21,7 @@ data class Track(
     @Json(name = "images")
     val images: Images?=null,
     @Json(name = "hub")
-    val hub: Hub,
+    val hub: Hub?,
     @Json(name = "artists")
     val artists: List<Artist>?=null,
     @Json(name = "url")

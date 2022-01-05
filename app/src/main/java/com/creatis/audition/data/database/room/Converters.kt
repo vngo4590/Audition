@@ -14,19 +14,21 @@ class Converters {
         /*
         * These methods are not ideal for performance but flexible enough for changes
         * */
-        private fun Share.toShareModel() : ShareModel = with(::ShareModel) {
+        private fun Share.toShareModel(): ShareModel = with(::ShareModel) {
             val propertiesByName = Share::class.memberProperties.associateBy { it.name }
             callBy(args = parameters.associateWith { parameter ->
                 propertiesByName[parameter.name]?.get(this@toShareModel)
             })
         }
-        private fun Images.toImagesModel() : ImagesModel = with(::ImagesModel) {
+
+        private fun Images.toImagesModel(): ImagesModel = with(::ImagesModel) {
             val propertiesByName = Images::class.memberProperties.associateBy { it.name }
             callBy(args = parameters.associateWith { parameter ->
                 propertiesByName[parameter.name]?.get(this@toImagesModel)
             })
         }
     }
+
     @TypeConverter
     fun fromShareToShareModel(share: Share): ShareModel {
         /*ShareModel(
@@ -41,10 +43,38 @@ class Converters {
         )*/
         return share.toShareModel()
     }
+
     @TypeConverter
-    fun fromImagesToImageModel(image: Images): ImagesModel {
+    fun fromShareModelToShare(share: ShareModel): Share {
+        return Share(
+            subject = share.subject,
+            text = share.text,
+            href = share.href,
+            image = share.image,
+            twitter = share.twitter,
+            html = share.html,
+            avatar = share.avatar,
+            snapchat = share.snapchat
+        )
+    }
+
+    @TypeConverter
+    fun fromImagesToImagesModel(image: Images): ImagesModel {
         return image.toImagesModel()
     }
+
+    @TypeConverter
+    fun fromImagesModelToImages(image: ImagesModel): Images {
+        return Images(
+            background = image.background,
+            coverArt = image.coverArt,
+            coverArtHq = image.coverArtHq,
+            joeColor = image.joeColor,
+            overflow = image.overflow,
+            default = image.default,
+        )
+    }
+
     @TypeConverter
     fun fromTrackToTrackModel(track: Track): TrackModel {
         return TrackModel(
@@ -56,13 +86,31 @@ class Converters {
             url = track.url
         )
     }
+
     @TypeConverter
     fun fromTrackToTrackProperties(track: Track): TrackAndProperties {
         val trackModel = fromTrackToTrackModel(track)
-        val imagesModel = track.images?.let { fromImagesToImageModel(it) }
+        val imagesModel = track.images?.let { fromImagesToImagesModel(it) }
         imagesModel?.trackId = trackModel.trackId
         val shareModel = fromShareToShareModel(track.share)
         shareModel.trackId = trackModel.trackId
         return TrackAndProperties(trackModel, shareModel, imagesModel)
+    }
+
+    @TypeConverter
+    fun fromTrackPropertiesToTrack(trackProperties: TrackAndProperties): Track {
+        val imagesModel = trackProperties.images?.let { fromImagesModelToImages(it) }
+        val shareModel = fromShareModelToShare(trackProperties.share)
+        return Track(
+            key=trackProperties.track.trackId,
+            layout = trackProperties.track.layout,
+            type = trackProperties.track.type,
+            title = trackProperties.track.title,
+            subtitle = trackProperties.track.subtitle,
+            url = trackProperties.track.url,
+            share = shareModel,
+            images = imagesModel,
+            hub=null
+        )
     }
 }

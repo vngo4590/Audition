@@ -35,4 +35,12 @@ data class ImagesModel(
     var overflow: String?= null,
     @ColumnInfo(name = "default", defaultValue = "NULL")
     var default: String?= null
-)
+) : ChildRelationModel {
+    override fun setParentId(id: String) {
+        trackId = id
+    }
+
+    override fun getParentId(): String? {
+        return trackId
+    }
+}

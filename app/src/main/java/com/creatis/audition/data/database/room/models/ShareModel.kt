@@ -41,4 +41,12 @@ data class ShareModel(
     val avatar: String? = null,
     @ColumnInfo(name = "snapchat")
     val snapchat: String? = null
-)
+) : ChildRelationModel {
+    override fun setParentId(id: String) {
+        trackId = id
+    }
+
+    override fun getParentId(): String? {
+        return trackId
+    }
+}
