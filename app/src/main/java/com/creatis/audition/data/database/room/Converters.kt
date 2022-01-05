@@ -11,7 +11,6 @@ import kotlin.reflect.full.memberProperties
 
 class Converters {
     companion object {
-
         /*
         * These methods are not ideal for performance but flexible enough for changes
         * */
@@ -56,5 +55,14 @@ class Converters {
             subtitle = track.subtitle,
             url = track.url
         )
+    }
+    @TypeConverter
+    fun fromTrackToTrackProperties(track: Track): TrackAndProperties {
+        val trackModel = fromTrackToTrackModel(track)
+        val imagesModel = track.images?.let { fromImagesToImageModel(it) }
+        imagesModel?.trackId = trackModel.trackId
+        val shareModel = fromShareToShareModel(track.share)
+        shareModel.trackId = trackModel.trackId
+        return TrackAndProperties(trackModel, shareModel, imagesModel)
     }
 }

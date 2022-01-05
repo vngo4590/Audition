@@ -13,12 +13,12 @@ interface ShareDao {
     @Query(
         "SELECT * FROM Share WHERE track_id = :trackId"
     )
-    fun getShareByTrackId(trackId: String) : LiveData<ShareModel>
+    fun getShareByTrackId(trackId: String) : ShareModel?
 
     @Query(
         "SELECT * FROM Share WHERE share_id = :shareId"
     )
-    fun getShareByShareId(shareId: Long) : LiveData<ShareModel>
+    fun getShareByShareId(shareId: Long) : ShareModel?
     @Query(
         "SELECT * FROM Share"
     )

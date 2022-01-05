@@ -13,17 +13,17 @@ interface ImageDao {
     @Query(
         "SELECT * FROM Images WHERE track_id = :trackId"
     )
-    fun getImageByTrackId(trackId: String): LiveData<ImagesModel>
+    fun getImageByTrackId(trackId: String): ImagesModel?
 
     @Query(
         "SELECT * FROM Images WHERE image_id = :imageId"
     )
-    fun getImageByImageId(imageId: Long): LiveData<ImagesModel>
+    fun getImageByImageId(imageId: Long): ImagesModel?
 
     @Query(
         "SELECT * FROM Images WHERE rowId = :rowId"
     )
-    fun getImageByRowId(rowId: Long): LiveData<ImagesModel>
+    fun getImageByRowId(rowId: Long): ImagesModel?
 
 
     @Query(

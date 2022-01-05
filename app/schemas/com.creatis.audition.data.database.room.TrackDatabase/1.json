@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f83a77ebd0f055f3bd8e9704c7710c24",
+    "identityHash": "9435a8db1c9f252ca979312e643aa443",
     "entities": [
       {
         "tableName": "Track",
@@ -69,7 +69,7 @@
       },
       {
         "tableName": "Images",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`image_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `track_id` TEXT DEFAULT NULL, `background` TEXT DEFAULT NULL, `cover_art` TEXT DEFAULT NULL, `cover_art_hq` TEXT DEFAULT NULL, `joe_color` TEXT DEFAULT NULL, `overflow` TEXT DEFAULT NULL, `default` TEXT DEFAULT NULL, FOREIGN KEY(`track_id`) REFERENCES `Track`(`track_id`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`image_id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `track_id` TEXT DEFAULT NULL, `background` TEXT DEFAULT NULL, `cover_art` TEXT DEFAULT NULL, `cover_art_hq` TEXT DEFAULT NULL, `joe_color` TEXT DEFAULT NULL, `overflow` TEXT DEFAULT NULL, FOREIGN KEY(`track_id`) REFERENCES `Track`(`track_id`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "imageId",
@@ -115,13 +115,6 @@
           {
             "fieldPath": "overflow",
             "columnName": "overflow",
-            "affinity": "TEXT",
-            "notNull": false,
-            "defaultValue": "NULL"
-          },
-          {
-            "fieldPath": "default",
-            "columnName": "default",
             "affinity": "TEXT",
             "notNull": false,
             "defaultValue": "NULL"
@@ -298,7 +291,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f83a77ebd0f055f3bd8e9704c7710c24')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9435a8db1c9f252ca979312e643aa443')"
     ]
   }
 }

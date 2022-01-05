@@ -27,4 +27,17 @@ data class TrackAndImages (
     var images: ImagesModel
 )
 
-
+data class TrackAndProperties (
+    @Embedded
+    var track: TrackModel,
+    @Relation(
+        parentColumn = "share_id",
+        entityColumn = "share_id"
+    )
+    var share: ShareModel,
+    @Relation(
+        parentColumn = "image_id",
+        entityColumn = "image_id"
+    )
+    var images: ImagesModel?=null
+)

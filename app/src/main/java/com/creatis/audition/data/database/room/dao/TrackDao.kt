@@ -4,23 +4,26 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.creatis.audition.data.database.room.Converters
 import com.creatis.audition.data.database.room.TrackAndImages
+import com.creatis.audition.data.database.room.TrackAndProperties
 import com.creatis.audition.data.database.room.TrackAndShare
 import com.creatis.audition.data.database.room.models.TrackModel
-import com.creatis.audition.data.playtrack.playtracklist.Track
 
 @Dao
 @TypeConverters(Converters::class)
-interface TrackDao {
+interface TrackDao : ImageDao, ShareDao{
     @Query(
         "SELECT * FROM Track WHERE rowId = :rowId"
     )
-    fun getTrackByRowId(rowId: Long): LiveData<TrackModel>
+    fun getTrackByRowId(rowId: Long): TrackModel?
 
     @Query(
         "SELECT * FROM Track WHERE track_id = :trackId"
     )
-    fun getTrackByTrackId(trackId: String): LiveData<TrackModel>
+    fun getTrackByTrackId(trackId: String): TrackModel?
 
+    /*
+    * Get Relational Data
+    * */
     @Transaction
     @Query("SELECT * FROM Track")
     fun getTrackAndImage(): LiveData<List<TrackAndImages>>
@@ -29,17 +32,9 @@ interface TrackDao {
     @Query("SELECT * FROM Track")
     fun getTrackAndShare(): LiveData<List<TrackAndShare>>
 
-    /*@Insert(
-        onConflict = OnConflictStrategy.REPLACE,
-        entity = TrackModel::class
-    )
-    fun insertTrackAndShare(trackAndShare: TrackAndShare)
-
-    @Insert(
-        onConflict = OnConflictStrategy.REPLACE,
-        entity = TrackModel::class
-    )
-    fun insertTrackAndImage(trackAndImages: TrackAndImages)*/
+    @Transaction
+    @Query("SELECT * FROM Track")
+    fun getTrackAndProperties(): LiveData<List<TrackAndProperties>>
 
     @Insert(
         onConflict = OnConflictStrategy.REPLACE
@@ -54,6 +49,8 @@ interface TrackDao {
 
     @Update
     fun updateTrack(track: TrackModel)
+
+
 
 }
 
