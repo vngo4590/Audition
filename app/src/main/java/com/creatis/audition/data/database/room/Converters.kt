@@ -29,8 +29,7 @@ class Converters {
         }
     }
 
-    @TypeConverter
-    fun fromShareToShareModel(share: Share): ShareModel {
+    fun fromShareToShareModel(trackId: String, share: Share): ShareModel {
         /*ShareModel(
             subject = share.subject,
             text = share.text,
@@ -41,7 +40,17 @@ class Converters {
             avatar = share.avatar,
             snapchat = share.snapchat
         )*/
-        return share.toShareModel()
+        return ShareModel(
+            trackId = trackId,
+            subject = share.subject,
+            text = share.text,
+            href = share.href,
+            image = share.image,
+            twitter = share.twitter,
+            html = share.html,
+            avatar = share.avatar,
+            snapchat = share.snapchat
+        )
     }
 
     @TypeConverter
@@ -58,9 +67,16 @@ class Converters {
         )
     }
 
-    @TypeConverter
-    fun fromImagesToImagesModel(image: Images): ImagesModel {
-        return image.toImagesModel()
+    fun fromImagesToImagesModel(trackId: String, image: Images): ImagesModel {
+        return ImagesModel(
+            trackId = trackId,
+            background = image.background,
+            coverArt = image.coverArt,
+            coverArtHq = image.coverArtHq,
+            joeColor = image.joeColor,
+            overflow = image.overflow,
+            defaultValue = image.default
+        )
     }
 
     @TypeConverter
@@ -71,7 +87,7 @@ class Converters {
             coverArtHq = image.coverArtHq,
             joeColor = image.joeColor,
             overflow = image.overflow,
-            default = image.default,
+            default = image.defaultValue,
         )
     }
 
@@ -83,21 +99,23 @@ class Converters {
             type = track.type,
             title = track.title,
             subtitle = track.subtitle,
-            url = track.url
+            url = track.url,
+            shareId = track.key,
         )
     }
 
     @TypeConverter
     fun fromTrackToTrackProperties(track: Track): TrackAndProperties {
         val trackModel = fromTrackToTrackModel(track)
-        val imagesModel = track.images?.let { fromImagesToImagesModel(it) }
-        imagesModel?.trackId = trackModel.trackId
-        val shareModel = fromShareToShareModel(track.share)
-        shareModel.trackId = trackModel.trackId
+        val trackId = trackModel.trackId
+        val imagesModel = track.images?.let { fromImagesToImagesModel(trackId, it) }
+        imagesModel?.trackId = trackId
+        val shareModel = fromShareToShareModel(trackId, track.share)
+        shareModel.trackId = trackId
         return TrackAndProperties(trackModel, shareModel, imagesModel)
     }
 
-    @TypeConverter
+    /*@TypeConverter
     fun fromTrackPropertiesToTrack(trackProperties: TrackAndProperties): Track {
         val imagesModel = trackProperties.images?.let { fromImagesModelToImages(it) }
         val shareModel = fromShareModelToShare(trackProperties.share)
@@ -112,5 +130,5 @@ class Converters {
             images = imagesModel,
             hub=null
         )
-    }
+    }*/
 }

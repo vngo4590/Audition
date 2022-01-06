@@ -15,16 +15,12 @@ import androidx.room.*
     ],
     indices = [
         Index(value = arrayOf("track_id"), unique = true),
-        Index(value = arrayOf("share_id"), unique = true),
-        Index(value = arrayOf("track_id", "share_id"), unique = true),
     ]
 )
 data class ShareModel(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "share_id")
-    var shareId: Long = 0L,
-    @ColumnInfo(name = "track_id", defaultValue = "NULL")
-    var trackId: String? = null,
+    @PrimaryKey
+    @ColumnInfo(name = "track_id")
+    var trackId: String,
     @ColumnInfo(name = "subject")
     val subject: String,
     @ColumnInfo(name = "text")

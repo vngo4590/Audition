@@ -12,17 +12,13 @@ import androidx.room.*
         onUpdate = ForeignKey.CASCADE,
     )],
     indices = [
-        Index(value = arrayOf("track_id"), unique = true),
-        Index(value = arrayOf("image_id"), unique = true),
-        Index(value = arrayOf("track_id", "image_id"), unique = true),
+        Index(value = arrayOf("track_id"), unique = true)
     ]
 )
 data class ImagesModel(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "image_id")
-    var imageId : Long = 0L,
-    @ColumnInfo(name = "track_id", defaultValue = "NULL")
-    var trackId: String? = null,
+    @PrimaryKey
+    @ColumnInfo(name = "track_id")
+    var trackId: String,
     @ColumnInfo(name = "background", defaultValue = "NULL")
     var background: String?= null,
     @ColumnInfo(name = "cover_art", defaultValue = "NULL")
@@ -33,8 +29,8 @@ data class ImagesModel(
     var joeColor: String?= null,
     @ColumnInfo(name = "overflow", defaultValue = "NULL")
     var overflow: String?= null,
-    @ColumnInfo(name = "default", defaultValue = "NULL")
-    var default: String?= null
+    @ColumnInfo(name = "default_value", defaultValue = "NULL")
+    var defaultValue: String?= null,
 ) : ChildRelationModel {
     override fun setParentId(id: String) {
         trackId = id

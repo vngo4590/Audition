@@ -18,11 +18,12 @@ data class TrackModel(
     val title: String,
     @ColumnInfo(name = "subtitle")
     val subtitle: String,
-    @ColumnInfo(name = "share_id")
-    var shareId: Long=0L,
+    @ColumnInfo(name = "share_id", defaultValue = "NULL")
+    @Nullable
+    var shareId: String?=null,
     @ColumnInfo(name = "image_id", defaultValue = "NULL")
     @Nullable
-    var imageId: Long?=0L,
+    var imageId: String?=null,
     @ColumnInfo(name = "url")
     val url: String,
     ) {

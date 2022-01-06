@@ -58,7 +58,5 @@ abstract class TrackDatabase : RoomDatabase() {
                 return instance
             }
         }
-
     }
-
 }

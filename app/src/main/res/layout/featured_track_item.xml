@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="trackInfo"
-            type="com.creatis.audition.data.playtrack.playtracklist.Track" />
+            type="com.creatis.audition.data.database.room.TrackAndProperties" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -76,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_normal"
-                android:text="@{trackInfo.title}"
+                android:text="@{trackInfo.track.title}"
                 app:layout_constraintStart_toEndOf="@+id/play_img"
                 app:layout_constraintTop_toTopOf="@+id/play_img"
                 tools:text="Play title" />
@@ -87,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@{trackInfo.subtitle}"
+                android:text="@{trackInfo.track.subtitle}"
                 app:layout_constraintBottom_toBottomOf="@+id/cardView"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="@+id/cardView"

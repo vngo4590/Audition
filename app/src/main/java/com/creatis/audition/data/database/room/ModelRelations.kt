@@ -1,5 +1,6 @@
 package com.creatis.audition.data.database.room
 
+import androidx.annotation.Nullable
 import androidx.room.Embedded
 import androidx.room.Relation
 import com.creatis.audition.data.database.room.models.*
@@ -12,7 +13,7 @@ data class TrackAndShare (
     var track: TrackModel,
     @Relation(
         parentColumn = "share_id",
-        entityColumn = "share_id"
+        entityColumn = "track_id"
     )
     var share: ShareModel
 )
@@ -22,9 +23,9 @@ data class TrackAndImages (
     var track: TrackModel,
     @Relation(
         parentColumn = "image_id",
-        entityColumn = "image_id"
+        entityColumn = "track_id"
     )
-    var images: ImagesModel
+    var images: ImagesModel?=null
 )
 
 data class TrackAndProperties (
@@ -32,12 +33,14 @@ data class TrackAndProperties (
     var track: TrackModel,
     @Relation(
         parentColumn = "share_id",
-        entityColumn = "share_id"
+        entityColumn = "track_id"
     )
-    var share: ShareModel,
+    @Nullable
+    var share: ShareModel?=null,
     @Relation(
         parentColumn = "image_id",
-        entityColumn = "image_id"
+        entityColumn = "track_id"
     )
+    @Nullable
     var images: ImagesModel?=null
 )

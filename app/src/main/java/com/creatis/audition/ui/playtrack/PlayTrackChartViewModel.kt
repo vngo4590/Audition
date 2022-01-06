@@ -3,10 +3,11 @@ package com.creatis.audition.ui.playtrack
 import android.app.Application
 import androidx.lifecycle.*
 import com.creatis.audition.data.database.PlayTrackRepository
+import com.creatis.audition.data.database.room.TrackAndProperties
 import com.creatis.audition.data.database.room.TrackDatabase
 import com.creatis.audition.data.network.ServiceUtil
-import com.creatis.audition.data.playtrack.playtracklist.Track
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class PlayTrackChartViewModel(application: Application) : AndroidViewModel(application) {
     private val shazamApiService = ServiceUtil.serviceApiCreate()
@@ -17,13 +18,16 @@ class PlayTrackChartViewModel(application: Application) : AndroidViewModel(appli
     /*
     * Variables
     * */
-    val playTrackCharts: MutableLiveData<List<Track>?>
-        get() = playTrackRepository.playTrackCharts
+    val playTrackCharts: LiveData<List<TrackAndProperties>>
+        get() {
+            return playTrackRepository.playTrackCharts
+        }
 
 
     init {
         viewModelScope.launch {
             playTrackRepository.fetchChartTracks()
+            Timber.i(playTrackRepository.playTrackCharts.value.toString())
         }
     }
 }

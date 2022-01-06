@@ -21,20 +21,6 @@ interface TrackDao : ImageDao, ShareDao{
     )
     fun getTrackByTrackId(trackId: String): TrackModel?
 
-    /*
-    * Get Relational Data
-    * */
-    @Transaction
-    @Query("SELECT * FROM Track")
-    fun getTrackAndImage(): LiveData<List<TrackAndImages>>
-
-    @Transaction
-    @Query("SELECT * FROM Track")
-    fun getTrackAndShare(): LiveData<List<TrackAndShare>>
-
-    @Transaction
-    @Query("SELECT * FROM Track")
-    fun getTrackAndProperties(): LiveData<List<TrackAndProperties>>
 
     @Insert(
         onConflict = OnConflictStrategy.REPLACE

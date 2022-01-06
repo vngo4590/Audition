@@ -16,11 +16,6 @@ interface ImageDao {
     fun getImageByTrackId(trackId: String): ImagesModel?
 
     @Query(
-        "SELECT * FROM Images WHERE image_id = :imageId"
-    )
-    fun getImageByImageId(imageId: Long): ImagesModel?
-
-    @Query(
         "SELECT * FROM Images WHERE rowId = :rowId"
     )
     fun getImageByRowId(rowId: Long): ImagesModel?

@@ -1,6 +1,10 @@
 package com.creatis.audition.data.database
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import com.creatis.audition.data.database.room.Converters
+import com.creatis.audition.data.database.room.TrackAndProperties
 import com.creatis.audition.data.database.room.TrackDatabase
 import com.creatis.audition.data.playtrack.chartlist.ChartList
 import com.creatis.audition.data.playtrack.playtracklist.PlayTracks
@@ -17,9 +21,15 @@ class PlayTrackRepository(
     /*
     * Variables
     * */
-    private val _playTrackCharts = MutableLiveData<List<Track>?>()
+    /*private val _playTrackCharts = MutableLiveData<List<Track>?>()
     val playTrackCharts: MutableLiveData<List<Track>?>
+        get() = _playTrackCharts*/
+    private var _playTrackCharts: LiveData<List<TrackAndProperties>> =
+        trackDatabase.trackRelationDao.getTrackAndProperties()
+    val playTrackCharts: LiveData<List<TrackAndProperties>>
         get() = _playTrackCharts
+
+    private val converters = Converters()
 
     /**
      * Get the artist's top tracks stored in the offline cache.
@@ -55,11 +65,18 @@ class PlayTrackRepository(
     suspend fun fetchChartTracks(
         locale: String? = "en-US", listId: String? = null,
         pageSize: Int? = 20, startFrom: Int? = 0
-    ) =
+    ) {
         withContext(ioDispatcher) {
-            _playTrackCharts.postValue( shazamSongsApiService.getChartTrackAsync(locale, listId, pageSize, startFrom)
-                    .await().tracks)
+            val tracks =
+                shazamSongsApiService.getChartTrackAsync(locale, listId, pageSize, startFrom)
+                    .await().tracks
+            val trackProperties: List<TrackAndProperties>? = tracks?.map {
+                converters.fromTrackToTrackProperties(it)
+            }
+            trackProperties?.let { trackDatabase.trackRelationDao.insertTrackAndPropertiesList(it) }
         }
+    }
+
 
     /**
      * Get the chartlist stored in the offline cache.
