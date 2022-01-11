@@ -29,7 +29,7 @@ class Converters {
         }
     }
 
-    fun fromShareToShareModel(trackId: String, share: Share): ShareModel {
+    private fun fromShareToShareModel(trackId: String, share: Share): ShareModel {
         /*ShareModel(
             subject = share.subject,
             text = share.text,
@@ -67,7 +67,7 @@ class Converters {
         )
     }
 
-    fun fromImagesToImagesModel(trackId: String, image: Images): ImagesModel {
+    private fun fromImagesToImagesModel(trackId: String, image: Images): ImagesModel {
         return ImagesModel(
             trackId = trackId,
             background = image.background,
@@ -114,21 +114,4 @@ class Converters {
         shareModel.trackId = trackId
         return TrackAndProperties(trackModel, shareModel, imagesModel)
     }
-
-    /*@TypeConverter
-    fun fromTrackPropertiesToTrack(trackProperties: TrackAndProperties): Track {
-        val imagesModel = trackProperties.images?.let { fromImagesModelToImages(it) }
-        val shareModel = fromShareModelToShare(trackProperties.share)
-        return Track(
-            key=trackProperties.track.trackId,
-            layout = trackProperties.track.layout,
-            type = trackProperties.track.type,
-            title = trackProperties.track.title,
-            subtitle = trackProperties.track.subtitle,
-            url = trackProperties.track.url,
-            share = shareModel,
-            images = imagesModel,
-            hub=null
-        )
-    }*/
 }

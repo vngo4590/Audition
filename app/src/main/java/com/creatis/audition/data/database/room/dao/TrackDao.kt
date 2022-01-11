@@ -10,7 +10,7 @@ import com.creatis.audition.data.database.room.models.TrackModel
 
 @Dao
 @TypeConverters(Converters::class)
-interface TrackDao : ImageDao, ShareDao{
+interface TrackDao {
     @Query(
         "SELECT * FROM Track WHERE rowId = :rowId"
     )

@@ -24,8 +24,8 @@ class PlayTrackRepository(
     /*private val _playTrackCharts = MutableLiveData<List<Track>?>()
     val playTrackCharts: MutableLiveData<List<Track>?>
         get() = _playTrackCharts*/
-    private var _playTrackCharts: LiveData<List<TrackAndProperties>> =
-        trackDatabase.trackRelationDao.getTrackAndProperties()
+    private var _playTrackCharts: MutableLiveData<List<TrackAndProperties>> =
+        MutableLiveData()
     val playTrackCharts: LiveData<List<TrackAndProperties>>
         get() = _playTrackCharts
 
@@ -73,10 +73,24 @@ class PlayTrackRepository(
             val trackProperties: List<TrackAndProperties>? = tracks?.map {
                 converters.fromTrackToTrackProperties(it)
             }
-            trackProperties?.let { trackDatabase.trackRelationDao.insertTrackAndPropertiesList(it) }
+            trackProperties?.let {
+                trackDatabase.trackRelationDao.insertTrackAndPropertiesList(
+                    trackDatabase,
+                    it
+                )
+            }
+            /*
+            * Call to update once done
+            * */
+            updateTrackData()
         }
     }
 
+    private fun updateTrackData() {
+        _playTrackCharts.postValue(
+            trackDatabase.trackRelationDao.getTrackAndProperties()
+        )
+    }
 
     /**
      * Get the chartlist stored in the offline cache.
