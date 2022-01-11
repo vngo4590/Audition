@@ -85,12 +85,6 @@ class PlayTrackRepository(
         }
     }
 
-    fun updateTrackData() {
-        /*_playTrackCharts.postValue(
-            trackDatabase.trackRelationDao.getTrackAndProperties().value
-        )*/
-    }
-
     /**
      * Get the chartlist stored in the offline cache.
      *
