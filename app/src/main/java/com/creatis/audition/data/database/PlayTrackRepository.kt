@@ -1,8 +1,6 @@
 package com.creatis.audition.data.database
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.creatis.audition.data.database.room.Converters
 import com.creatis.audition.data.database.room.TrackAndProperties
 import com.creatis.audition.data.database.room.TrackDatabase
@@ -24,11 +22,12 @@ class PlayTrackRepository(
     /*private val _playTrackCharts = MutableLiveData<List<Track>?>()
     val playTrackCharts: MutableLiveData<List<Track>?>
         get() = _playTrackCharts*/
-    private var _playTrackCharts: MutableLiveData<List<TrackAndProperties>> =
-        MutableLiveData()
+    private var _playTrackCharts: LiveData<List<TrackAndProperties>> =
+        trackDatabase.trackRelationDao.getTrackAndProperties()
     val playTrackCharts: LiveData<List<TrackAndProperties>>
-        get() = _playTrackCharts
-
+        get() {
+            return _playTrackCharts
+        }
     private val converters = Converters()
 
     /**
@@ -82,14 +81,14 @@ class PlayTrackRepository(
             /*
             * Call to update once done
             * */
-            updateTrackData()
+            /*updateTrackData()*/
         }
     }
 
-    private fun updateTrackData() {
-        _playTrackCharts.postValue(
-            trackDatabase.trackRelationDao.getTrackAndProperties()
-        )
+    fun updateTrackData() {
+        /*_playTrackCharts.postValue(
+            trackDatabase.trackRelationDao.getTrackAndProperties().value
+        )*/
     }
 
     /**

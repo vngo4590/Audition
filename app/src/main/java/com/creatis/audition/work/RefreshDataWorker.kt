@@ -20,6 +20,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters) :
         val repository = PlayTrackRepository(trackDatabase, shazamApiService)
         return try {
             repository.fetchChartTracks()
+//            repository.updateTrackData()
             Result.success()
         } catch (e: HttpException) {
             Result.retry()

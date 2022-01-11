@@ -1,8 +1,17 @@
 package com.creatis.audition.data.database.room.util
 
+import androidx.annotation.Nullable
 import com.creatis.audition.data.database.room.models.ImagesModel
 import com.creatis.audition.data.database.room.models.ShareModel
 import com.creatis.audition.data.database.room.models.TrackModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+
 
 /**
  * Factory class of TrackModel and its children
@@ -76,4 +85,28 @@ class TrackModelFactory {
         }
 
     }
+}
+/**
+* Thís Extension function allows us to wait for value
+* */
+@Throws(InterruptedException::class)
+suspend fun <T> LiveData<T>.getOrAwaitValue(): T? {
+    val data = arrayOfNulls<Any>(1)
+    val latch = CountDownLatch(1)
+    val liveData = this
+    val observer: Observer<T> = object : Observer<T> {
+        override fun onChanged(o: T?) {
+            data[0] = o
+            latch.countDown()
+            liveData.removeObserver(this)
+        }
+    }
+    coroutineScope {
+        val job = launch(Dispatchers.Main) {
+            liveData.observeForever(observer)
+        }
+        job.join()
+    }
+    latch.await(2, TimeUnit.SECONDS)
+    return data[0] as T?
 }

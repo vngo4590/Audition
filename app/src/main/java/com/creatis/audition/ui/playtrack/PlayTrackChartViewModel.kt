@@ -27,7 +27,7 @@ class PlayTrackChartViewModel(application: Application) : AndroidViewModel(appli
     init {
         viewModelScope.launch {
             playTrackRepository.fetchChartTracks()
-            Timber.i(playTrackRepository.playTrackCharts.value.toString())
+//            Timber.i(playTrackRepository.playTrackCharts.value.toString())
         }
     }
 }

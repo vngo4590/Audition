@@ -28,7 +28,7 @@ interface TrackRelationDao {
 
     @Transaction
     @Query("SELECT * FROM Track")
-    fun getTrackAndProperties(): List<TrackAndProperties>
+    fun getTrackAndProperties(): LiveData<List<TrackAndProperties>>
 
     /*
     * Get Track Share By Id

@@ -15,7 +15,7 @@ import com.creatis.audition.data.network.HeaderInterceptor
  */
 @BindingAdapter("goneIfNotNull")
 fun goneIfNotNull(view: View, it: Any?) {
-    view.visibility = if (it != null) View.GONE else View.VISIBLE
+    view.visibility = if (it != null) View.VISIBLE else View.GONE
 }
 
 /**
@@ -45,7 +45,7 @@ fun setImageUrl(imageView: ImageView, url: String?) {
             .error(R.mipmap.gradienta)
             .into(imageView)
     } else {
-        glide.load(R.drawable.avatar).centerInside()
+        glide.load(R.drawable.ic_launcher_foreground).centerInside()
             .into(imageView)
     }
 }

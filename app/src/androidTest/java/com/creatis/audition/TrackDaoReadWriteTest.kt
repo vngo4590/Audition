@@ -17,10 +17,11 @@ import com.creatis.audition.data.database.room.models.ImagesModel
 import com.creatis.audition.data.database.room.models.ShareModel
 import com.creatis.audition.data.database.room.models.TrackModel
 import com.creatis.audition.data.database.room.util.TrackModelFactory
+import com.creatis.audition.data.database.room.util.getOrAwaitValue
+import com.creatis.audition.testutil.CoroutineTestRule
 import com.creatis.audition.testutil.TrackSampleData
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
+import kotlinx.coroutines.test.TestDispatcher
 import org.junit.After
 
 import org.junit.Test
@@ -28,7 +29,9 @@ import org.junit.runner.RunWith
 
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Rule
 import java.io.IOException
+import kotlin.concurrent.thread
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -183,17 +186,22 @@ class TrackDaoReadWriteTest {
     fun writeGetTrackAndProperties() = runBlocking {
         trackRelationDao.insertTrackAndPropertiesList(trackDatabase, trackPropertiesList)
 
-        val trackList = trackRelationDao.getTrackAndProperties()
-        val trackMap: Map<String, List<TrackAndProperties>> = trackList.groupBy { it.track.trackId }
+        val trackList = trackRelationDao.getTrackAndProperties().getOrAwaitValue()
 
-        assertEquals("The retrieved list is missing some information", numTracks, trackList.size)
+        assertNotNull("Retrieved result is null", trackList)
+        val trackMap: Map<String, List<TrackAndProperties>> =
+            (trackList?.groupBy { it.track.trackId } ?: assertEquals(
+                "The retrieved list is missing some information",
+                numTracks,
+                trackList?.size
+            )) as Map<String, List<TrackAndProperties>>
 
         for (track in trackPropertiesList) {
-            assertEquals("%s Does not have equal values".format(track.track.trackId)
-                , track, trackMap[track.track.trackId]?.get(0)
+            assertEquals(
+                "%s Does not have equal values".format(track.track.trackId),
+                track,
+                trackMap[track.track.trackId]?.get(0)
             )
         }
     }
-
-
 }
