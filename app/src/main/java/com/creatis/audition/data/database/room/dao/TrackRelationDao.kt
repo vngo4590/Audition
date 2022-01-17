@@ -30,6 +30,10 @@ interface TrackRelationDao {
     @Query("SELECT * FROM Track")
     fun getTrackAndProperties(): LiveData<List<TrackAndProperties>>
 
+    @Transaction
+    @Query("SELECT * FROM Track LIMIT :topResult")
+    fun getTrackAndPropertiesTopResults(topResult : Int): LiveData<List<TrackAndProperties>>
+
     /*
     * Get Track Share By Id
     * */

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.creatis.audition.data.database.room.Converters
 import com.creatis.audition.data.database.room.TrackAndProperties
 import com.creatis.audition.data.database.room.TrackDatabase
+import com.creatis.audition.data.network.ServiceUtil
 import com.creatis.audition.data.playtrack.chartlist.ChartList
 import com.creatis.audition.data.playtrack.playtracklist.PlayTracks
 import com.creatis.audition.data.playtrack.playtracklist.Track
@@ -27,6 +28,12 @@ class PlayTrackRepository(
     val playTrackCharts: LiveData<List<TrackAndProperties>>
         get() {
             return _playTrackCharts
+        }
+    private var _topPlayTrackCharts: LiveData<List<TrackAndProperties>> =
+        trackDatabase.trackRelationDao.getTrackAndPropertiesTopResults(3)
+    val topPlayTrackCharts: LiveData<List<TrackAndProperties>>
+        get() {
+            return _topPlayTrackCharts
         }
     private val converters = Converters()
 

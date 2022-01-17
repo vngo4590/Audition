@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="trackModel"
+            type="com.creatis.audition.data.database.room.TrackAndProperties" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:elevation="@dimen/elevation_mild"
+        android:translationZ="@dimen/elevation_mild"
+        app:cardBackgroundColor="@color/primaryColor"
+        app:cardCornerRadius="@dimen/card_corner_radius_normal"
+        app:cardElevation="@dimen/elevation_mild"
+        android:layout_marginHorizontal="@dimen/margin_normal"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/image_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/featured_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/placeholder_str"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@mipmap/ic_launcher"
+                    app:imageUrl="@{trackModel.images.coverArt}"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/card_gradient"
+                    android:elevation="0dp"
+                    app:cardBackgroundColor="@color/fully_transparent"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp" />
+
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/featured_title_text"
+                style="@style/TitleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:textColor="@color/secondaryTextColor"
+                app:layout_constraintBottom_toTopOf="@+id/featured_subtitle_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Card Title"
+                android:textAlignment="center"
+                android:text="@{trackModel.track.title}"/>
+
+            <TextView
+                android:id="@+id/featured_subtitle_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginHorizontal="@dimen/margin_normal"
+                android:layout_marginVertical="@dimen/margin_normal"
+                tools:text="Card SubTitle"
+                style="@style/BodyText"
+                android:textAlignment="center"
+                android:textColor="@color/secondaryTextColor"
+                android:text="@{trackModel.track.subtitle}"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

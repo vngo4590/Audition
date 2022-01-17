@@ -7,4 +7,5 @@
     <dimen name="elevation_mild">10dp</dimen>
     <dimen name="track_size_small">100dp</dimen>
     <dimen name="avatar_size_small">50dp</dimen>
+    <dimen name="card_corner_radius_normal">20dp</dimen>
 </resources>

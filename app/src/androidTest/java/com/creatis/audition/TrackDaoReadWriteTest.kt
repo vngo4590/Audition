@@ -204,4 +204,21 @@ class TrackDaoReadWriteTest {
             )
         }
     }
+
+    @Test
+    fun writeGetTrackAndPropertiesTopResults() = runBlocking {
+        trackRelationDao.insertTrackAndPropertiesList(trackDatabase, trackPropertiesList)
+
+        val trackList = trackRelationDao.getTrackAndPropertiesTopResults(3).getOrAwaitValue()
+        assertNotNull("Retrieved result is null", trackList)
+        assertEquals("Retrieved result does not have the correct size", 3, trackList?.size)
+        if (trackList != null) {
+            for (trackProperties in trackList) {
+                assertTrue(
+                    "Result is not in the original list",
+                    trackPropertiesList.contains(trackProperties)
+                )
+            }
+        }
+    }
 }

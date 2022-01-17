@@ -90,8 +90,8 @@ class TrackModelFactory {
 * Thís Extension function allows us to wait for value
 * */
 @Throws(InterruptedException::class)
-suspend fun <T> LiveData<T>.getOrAwaitValue(): T? {
-    val data = arrayOfNulls<Any>(1)
+suspend inline fun <reified T> LiveData<T>.getOrAwaitValue(): T? {
+    val data = arrayOfNulls<T>(1)
     val latch = CountDownLatch(1)
     val liveData = this
     val observer: Observer<T> = object : Observer<T> {
@@ -108,5 +108,5 @@ suspend fun <T> LiveData<T>.getOrAwaitValue(): T? {
         job.join()
     }
     latch.await(2, TimeUnit.SECONDS)
-    return data[0] as T?
+    return data[0]
 }
