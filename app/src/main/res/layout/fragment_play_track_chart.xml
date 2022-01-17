@@ -9,25 +9,49 @@
             type="com.creatis.audition.ui.playtrack.PlayTrackChartViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.playtrack.PlayTrackChartFragment"
         >
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/margin_normal" />
 
-        <ProgressBar
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/margin_normal" />
+        <TextView
+            android:id="@+id/text_top_tracks"
+            style="@style/TitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/top_tracks"
+            app:layout_constraintStart_toStartOf="@+id/left_guide"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--<ProgressBar
             android:id="@+id/loading_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:goneIfNotNull="@{chartViewModel.playTrackCharts}"/>
+            app:goneIfNotNull="@{chartViewModel.playTrackCharts}"/>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/featured_track_item"
-            />
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_normal"
+            android:paddingBottom="@dimen/margin_normal"
+            app:layout_constraintEnd_toStartOf="@+id/right_guide"
+            app:layout_constraintStart_toStartOf="@+id/left_guide"
+            app:layout_constraintTop_toBottomOf="@+id/text_top_tracks"
+            tools:listitem="@layout/featured_track_item" />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

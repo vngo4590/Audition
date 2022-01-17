@@ -5,10 +5,6 @@
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />
-    <item
-        android:id="@+id/navigation_play_track_chart"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_chart" />
 
     <item
         android:id="@+id/navigation_dashboard"

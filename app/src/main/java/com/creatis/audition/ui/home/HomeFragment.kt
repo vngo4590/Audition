@@ -9,7 +9,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.creatis.audition.R
 import com.creatis.audition.databinding.FragmentHomeBinding
 class HomeFragment : Fragment() {
 
@@ -49,7 +51,9 @@ class HomeFragment : Fragment() {
                 })
             }
         })
-
+        binding.textSeeMoreTopTracks.setOnClickListener {
+            view?.findNavController()?.navigate(R.id.action_navigation_home_to_navigation_play_track_chart)
+        }
         return root
     }
 
