@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
 import com.creatis.audition.databinding.ActivityMainBinding
 import com.creatis.audition.work.RefreshDataWorker
+import com.google.android.material.internal.ContextUtils.getActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -75,5 +76,9 @@ class MainActivity : AppCompatActivity() {
         * Set up timber
         * */
         Timber.plant(Timber.DebugTree())
+        /*
+        * Hide Action Bar
+        * */
+        supportActionBar?.hide()
     }
 }

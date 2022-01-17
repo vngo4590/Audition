@@ -6,5 +6,5 @@
     <string name="placeholder_str">Placeholder</string>
     <string name="title_chart">Chart</string>
     <string name="top_tracks">Top Tracks</string>
-    <string name="see_more">See More</string>
+    <string name="see_more"><u>See More</u></string>
 </resources>

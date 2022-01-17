@@ -57,21 +57,5 @@
             app:layout_constraintTop_toBottomOf="@+id/text_top_tracks"
             tools:itemCount="1"
             tools:listitem="@layout/featured_track_meta_item" />
-
-        <!--<LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <ListView
-                android:id="@+id/featured_track_cards"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp"
-                tools:listitem="@layout/featured_track_meta_item"
-                android:splitMotionEvents="true"/>
-        </LinearLayout>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
