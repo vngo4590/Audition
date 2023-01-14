@@ -11,7 +11,7 @@ import okhttp3.Response
 class HeaderInterceptor : Interceptor {
     companion object {
         const val API_HOST = "shazam.p.rapidapi.com"
-        const val API_KEY = "e2f55d2e12msh6d886fa1aff9d4dp10da0bjsnfe87c160ae51"
+        const val API_KEY = "5b97ed904amsh7fc419def9d8186p1bc2c6jsn197bea2f7ffa"
     }
     override fun intercept(chain: Interceptor.Chain): Response = chain.run {
         proceed(
